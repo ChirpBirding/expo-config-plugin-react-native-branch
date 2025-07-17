@@ -15,15 +15,6 @@
     "expo-module.config.json",
     "ios"
   ],
-  "scripts": {
-    "build": "expo-module build",
-    "clean": "expo-module clean",
-    "lint": "expo-module lint",
-    "test": "expo-module test",
-    "prepare": "expo-module prepare",
-    "prepublishOnly": "expo-module prepublishOnly",
-    "expo-module": "expo-module"
-  },
   "keywords": [
     "expo",
     "react-native",
