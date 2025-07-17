@@ -1,9 +1,7 @@
 {
-  "platforms": [
-    "android",
-    "ios"
-  ],
+  "platforms": ["android", "ios"],
   "ios": {
+    "modules": ["BranchInitModule"],
     "appDelegateSubscribers": ["BranchAppDelegate"]
   }
 }
