@@ -1,3 +1,3 @@
-export { default } from "./build/withBranch";
+export { default } from "./src/withBranch";
 
 export { initSession } from "./src/BranchInit";
