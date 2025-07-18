@@ -1,17 +1,18 @@
 import ExpoModulesCore
 import RNBranch
+import os.log
 
 public class BranchInitModule: Module {
   public func definition() -> ModuleDefinition {
     Name("BranchInit")
     
     AsyncFunction("initSession") { (promise: Promise) in
-      print("BranchInitModule: initSession called from JS")
+      os_log("BranchInitModule: initSession called from JS", type: .info)
       DispatchQueue.main.async {
         let launchOptions = BranchAppDelegate.getCachedLaunchOptions()
-        print("BranchInitModule: Retrieved launch options: \(String(describing: launchOptions))")
+        os_log("BranchInitModule: Retrieved launch options: %@", type: .info, String(describing: launchOptions))
         RNBranch.initSession(launchOptions: launchOptions, isReferrable: true)
-        print("BranchInitModule: RNBranch.initSession completed")
+        os_log("BranchInitModule: RNBranch.initSession completed", type: .info)
         promise.resolve(nil)
       }
     }
