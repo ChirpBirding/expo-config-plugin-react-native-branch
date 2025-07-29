@@ -10,7 +10,7 @@ public class BranchInitModule: Module {
       os_log("BranchInitModule: initSession called from JS", type: .info)
       DispatchQueue.main.async {
         let launchOptions = BranchAppDelegate.getCachedLaunchOptions()
-        os_log("BranchInitModule: Retrieved launch options: %@", type: .info, String(describing: launchOptions))
+        os_log("BranchInitModule: Retrieved launch options: %{public}%@", type: .info, String(describing: launchOptions))
         RNBranch.initSession(launchOptions: launchOptions, isReferrable: true)
         os_log("BranchInitModule: RNBranch.initSession completed", type: .info)
         promise.resolve(nil)
