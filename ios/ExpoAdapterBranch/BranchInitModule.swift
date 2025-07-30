@@ -12,7 +12,12 @@ public class BranchInitModule: Module {
         let launchOptions = BranchAppDelegate.getCachedLaunchOptions()
         os_log("BranchInitModule: Retrieved launch options: %{public}@", type: .info, String(describing: launchOptions))
         RNBranch.initSession(launchOptions: launchOptions, isReferrable: true)
-        os_log("BranchInitModule: RNBranch.initSession completed", type: .info)
+        
+        if let cachedParams = BranchAppDelegate.getCachedOpenUrlParams() {
+          os_log("BranchInitModule: call RNBranch.application with cached URL: %{public}@", type: .info, cachedParams.url.absoluteString)
+          RNBranch.application(cachedParams.application, open: cachedParams.url, options: cachedParams.options)
+        }
+        
         promise.resolve(nil)
       }
     }
