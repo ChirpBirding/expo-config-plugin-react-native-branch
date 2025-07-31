@@ -13,7 +13,8 @@ public class BranchAppDelegate: ExpoAppDelegateSubscriber {
 
   public func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
     os_log("BranchAppDelegate: open url: %{public}@", type: .info, url.absoluteString)
-    return RNBranch.application(application, open:url, options:options)
+//    return RNBranch.application(application, open:url, options:options)
+    return true
   }
 
   public func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
