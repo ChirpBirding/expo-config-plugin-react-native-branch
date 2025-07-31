@@ -1,5 +1,4 @@
 import ExpoModulesCore
-import RNBranch
 import os.log
 
 public class BranchInitModule: Module {
@@ -7,14 +6,7 @@ public class BranchInitModule: Module {
     Name("BranchInit")
     
     AsyncFunction("initSession") { (promise: Promise) in
-      os_log("BranchInitModule: initSession called from JS", type: .info)
-      DispatchQueue.main.async {
-        let launchOptions = BranchAppDelegate.getCachedLaunchOptions()
-        os_log("BranchInitModule: Retrieved launch options: %{public}@", type: .info, String(describing: launchOptions))
-        RNBranch.initSession(launchOptions: launchOptions, isReferrable: true)
-        os_log("BranchInitModule: RNBranch.initSession completed", type: .info)
-        promise.resolve(nil)
-      }
+      os_log("BranchInitModule: emply initSession called from JS", type: .info)
     }
   }
 }
