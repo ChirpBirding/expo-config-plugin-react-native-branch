@@ -7,7 +7,6 @@ public class BranchAppDelegate: ExpoAppDelegateSubscriber {
   private static var cachedOpenUrlParams: (application: UIApplication, url: URL, options: [UIApplication.OpenURLOptionsKey : Any])?
 
   public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    RNBranch.enableLogging()
     BranchAppDelegate.cachedLaunchOptions = launchOptions
     os_log("BranchAppDelegate: Launch options: %{public}@ cached successfully", type: .info, String(describing: launchOptions))
     return true

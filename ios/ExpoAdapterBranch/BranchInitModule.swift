@@ -9,6 +9,7 @@ public class BranchInitModule: Module {
     AsyncFunction("initSession") { (promise: Promise) in
       os_log("BranchInitModule: initSession called from JS", type: .info)
       DispatchQueue.main.async {
+        RNBranch.enableLogging()
         let launchOptions = BranchAppDelegate.getCachedLaunchOptions()
         os_log("BranchInitModule: Retrieved launch options: %{public}@", type: .info, String(describing: launchOptions))
         RNBranch.initSession(launchOptions: launchOptions, isReferrable: true)
