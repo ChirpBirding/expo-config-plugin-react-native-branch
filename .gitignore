@@ -10,6 +10,7 @@ web-build
 node_modules
 npm-debug.log
 yarn-error.log
+.eslintrc.js
 
 # Ruby
 .direnv
@@ -52,7 +53,7 @@ xcuserdata
 .history/
 
 # Ignore build folders
-
+build/
 packages/*/build/**
 packages/*/plugin/build/**
 packages/@*/*/build/**
