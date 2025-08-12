@@ -5,6 +5,7 @@ import {
   withInfoPlist,
   withXcodeProject,
   withDangerousMod,
+  IOSConfig,
 } from "expo/config-plugins";
 import * as path from "path";
 import * as fs from "fs";
@@ -65,7 +66,7 @@ export const withBranchIOS: ConfigPlugin<ConfigData> = (config, data) => {
   config = withDangerousMod(config, [
     "ios",
     async (config) => {
-      const iosProjectRoot = config.modRequest.platformProjectRoot;
+      const iosProjectRoot = config.modRequest.platformProjectRoot; //ios folder
       const branchJsonPath = path.join(iosProjectRoot, "branch.json");
 
       const branchConfig = {
@@ -86,13 +87,13 @@ export const withBranchIOS: ConfigPlugin<ConfigData> = (config, data) => {
     const project = config.modResults;
     const branchJsonPath = "branch.json";
 
-    // Add file to project as a resource
-    project.addResourceFile(
-      branchJsonPath,
-      {},
-      project.findPBXGroupKey({ name: "Resources" }) ||
-        project.getFirstProject().firstProject.mainGroup
-    );
+    IOSConfig.XcodeUtils.addResourceFileToGroup({
+      filepath: branchJsonPath,
+      groupName: config.modRequest.projectName || "Resources",
+      project,
+      isBuildFile: false,
+      verbose: true,
+    });
 
     return config;
   });
