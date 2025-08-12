@@ -3,7 +3,11 @@ import {
   type ConfigPlugin,
   InfoPlist,
   withInfoPlist,
+  withXcodeProject,
+  withDangerousMod,
 } from "expo/config-plugins";
+import * as path from "path";
+import * as fs from "fs";
 
 import { ConfigData } from "./types";
 
@@ -54,6 +58,42 @@ export const withBranchIOS: ConfigPlugin<ConfigData> = (config, data) => {
     } else {
       delete config.modResults.branch_universal_link_domains;
     }
+    return config;
+  });
+
+  // Add branch.json to iOS bundle
+  config = withDangerousMod(config, [
+    "ios",
+    async (config) => {
+      const iosProjectRoot = config.modRequest.platformProjectRoot;
+      const branchJsonPath = path.join(iosProjectRoot, "branch.json");
+
+      const branchConfig = {
+        deferInitForPluginRuntime: true,
+      };
+
+      await fs.promises.writeFile(
+        branchJsonPath,
+        JSON.stringify(branchConfig, null, 2)
+      );
+
+      return config;
+    },
+  ]);
+
+  // Add it to the Xcode project
+  config = withXcodeProject(config, (config) => {
+    const project = config.modResults;
+    const branchJsonPath = "branch.json";
+
+    // Add file to project as a resource
+    project.addResourceFile(
+      branchJsonPath,
+      {},
+      project.findPBXGroupKey({ name: "Resources" }) ||
+        project.getFirstProject().firstProject.mainGroup
+    );
+
     return config;
   });
 
